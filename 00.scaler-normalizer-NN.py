@@ -1,7 +1,7 @@
-# Written by: Nguyet Nguyen and Vinh Ngo on 08/13/2020
-# Script used normalized data prior to running Kmeans scripts
+# Written by: Nguyet Nguyen and Vinh Ngo on 10/09/2020
+# Script used filter out normalized data by cut-off
 
-# PROJECT     RUN     CLONE      TIME     STEM1       STEM2       LOOP1       LOOP2       TERTIARY     NATIVE      NON-NATIVE      RMSD        RG
+#  STEM1       STEM2       LOOP1       LOOP2       TERTIARY     NATIVE      NON-NATIVE      RMSD        RG
 
 usage = "\nUsage:python scalar-normalizer.py [Summarized_list] [Output]\n"
 
