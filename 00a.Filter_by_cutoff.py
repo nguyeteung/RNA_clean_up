@@ -11,10 +11,6 @@ import numpy as np
 if (len(sys.argv) == 4):
 
     # Arrays to be normalized 
-    project_array = []
-    run_array = []
-    clone_array = []
-    time_array = []
     stem1_array = []
     stem2_array = []
     loop1_array = []
@@ -24,9 +20,12 @@ if (len(sys.argv) == 4):
     nonnative_array = []
     RMSD_array = []
     Rg_array = []
-
-    summarized_list = sys.argv[1]
-    filename = open(summarized_list, "r")
+    project_array = []
+    run_array = []
+    clone_array = []
+    time_array = []
+    normalized_list = sys.argv[1]
+    filename = open(normalized_list, "r")
 
 
     for line in filename:
@@ -55,31 +54,34 @@ if (len(sys.argv) == 4):
     nonnative_array = np.array(nonnative_array).astype(np.float)
     RMSD_array = np.array(RMSD_array).astype(np.float)
     Rg_array = np.array(Rg_array).astype(np.float)
+    project_array = np.array(project_array).astype(str)
+    run_array = np.array(run_array).astype(np.float)
+    clone_array = np.array(clone_array).astype(np.float)
+    time_array = np.array(time_array).astype(np.int)
 
-    # Filter with time cutoff
-    time_cutoff = sys.argv[2]
+
+  # Filter with time cutoff
+    time_cutoff = int(sys.argv[2])
 
 
     # Getting the user's input so it can output the file
     output_name = sys.argv[3]
     output_file = open(output_name, "w")
+    
 
     # Loop in order to write back to the Output file
-    for i in range(len(stem1_array)):
-        for j in time_array:
-            if j >= time_cutoff:
-                line_to_write =  str(stem1_array[i]) + "\t" + str(stem2_array[i]) + "\t" + str(loop1_array[i]) + "\t" + str(loop2_array[i]) + "\t" + str(tertiary_array[i]) +  "\t" + str(nonnative_array[i]) + "\t" + str(RMSD_array[i]) + "\t" + str(Rg_array[i]) + "\t" + str(project_array[i]) + "\t" + str(run_array[i]) + "\t" + str(clone_array[i]) + "\t" + str(time_array[i]) + "\n"
 
-        # Writting to the file line by line
-        output_file.write(line_to_write)
-
-    # Closing out the files to read and write from so it doesn't lock
+    for i in range(len(time_array)):
+        if time_array[i] >= time_cutoff:
+            line_to_write = str(stem1_array[i]) + '\t'  + str(stem2_array[i]) + "\t" + str(loop1_array[i]) + "\t" + str(loop2_array[i]) + "\t" + str(tertiary_array[i]) +  "\t" + str(nonnative_array[i]) + "\t" + str(RMSD_array[i]) + "\t" + str(Rg_array[i]) + "\t" + str(project_array[i]) + "\t" + str(run_array[i]) + "\t" + str(clone_array[i]) + "\t" + str(time_array[i]) + "\n"
+            output_file.write(line_to_write)
+ # Closing out the files to read and write from so it doesn't lock
     output_file.close()
     filename.close()
 
 else:
     print(usage)
-    sys.exit()
+    sys.exit()   
 
 
         
